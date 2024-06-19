@@ -12,7 +12,7 @@ import io.appium.java_client.AppiumBy;
 public class AppiumBasics extends BaseTest {
 	
 	@Test
-	private void wifiSettingsName() throws MalformedURLException, URISyntaxException {
+	public void wifiSettingsName() throws MalformedURLException, URISyntaxException {
 		WebElement preferenceBtn = driver.findElement(AppiumBy.accessibilityId("Preference"));
 		preferenceBtn.click();
 		
