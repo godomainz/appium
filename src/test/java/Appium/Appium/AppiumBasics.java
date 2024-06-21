@@ -2,6 +2,7 @@ package Appium.Appium;
 
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
+import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -24,6 +25,12 @@ public class AppiumBasics extends BaseTest {
 		
 		WebElement wifiSettingsBtn = driver.findElement(By.xpath("//android.widget.ListView[@resource-id=\"android:id/list\"]/android.widget.LinearLayout[2]/android.widget.RelativeLayout"));
 		wifiSettingsBtn.click();
+		
+		WebElement wifiNameTxt = driver.findElement(By.id("android:id/edit"));
+		wifiNameTxt.sendKeys("Akila");
+		
+		List<WebElement> okBtn = driver.findElements(AppiumBy.className("android.widget.Button"));
+		okBtn.get(1).click();
 	}
 
 }
