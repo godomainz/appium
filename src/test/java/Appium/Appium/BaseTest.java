@@ -80,7 +80,10 @@ public class BaseTest {
 			    "endY", y
 			));
 	}
-
+	
+	public void startActivity(String fullActivityName) {
+		((JavascriptExecutor) driver).executeScript("mobile: startActivity", ImmutableMap.of("intent", fullActivityName));
+	}
 
 
 	@AfterClass

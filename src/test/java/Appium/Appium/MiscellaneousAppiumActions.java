@@ -16,11 +16,16 @@ public class MiscellaneousAppiumActions extends BaseTest {
 	
 	@Test
 	public void miscAppActions() {
-		WebElement preferenceBtn = driver.findElement(AppiumBy.accessibilityId("Preference"));
-		preferenceBtn.click();
 		
-		WebElement preferenceDependenciesBtn = driver.findElement(By.xpath("//android.widget.TextView[@content-desc=\"3. Preference dependencies\"]"));
-		preferenceDependenciesBtn.click();
+		//Windows --> adb shell dumpsys window | find "mCurrentFocus"
+		//Mac --> adb shell dumpsys window | grep -E "mCurrentFocus"
+		
+		startActivity("io.appium.android.apis/io.appium.android.apis.preference.PreferenceDependencies");
+//		WebElement preferenceBtn = driver.findElement(AppiumBy.accessibilityId("Preference"));
+//		preferenceBtn.click();
+//		
+//		WebElement preferenceDependenciesBtn = driver.findElement(By.xpath("//android.widget.TextView[@content-desc=\"3. Preference dependencies\"]"));
+//		preferenceDependenciesBtn.click();
 		
 		
 		WebElement wifiCheckBox = driver.findElement(By.id("android:id/checkbox"));
