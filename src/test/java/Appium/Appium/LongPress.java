@@ -1,10 +1,9 @@
 package Appium.Appium;
 
-import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
-import com.google.common.collect.ImmutableMap;
 import io.appium.java_client.AppiumBy;
 
 public class LongPress extends BaseTest {
@@ -22,7 +21,14 @@ public class LongPress extends BaseTest {
 		
 		WebElement peoplesNamesBtn = driver.findElement(AppiumBy.xpath("//android.widget.TextView[@text=\"People Names\"]"));
 
-		((JavascriptExecutor) driver).executeScript("mobile: longClickGesture", ImmutableMap.of("elementId", ((RemoteWebElement) peoplesNamesBtn).getId(), "duration", 2000));
+		longPressAction(peoplesNamesBtn);
+		
+		WebElement sampleMenuLbl = driver.findElement(By.id("android:id/title"));
+		String sampleMenu = sampleMenuLbl.getText();
+		
+		Assert.assertTrue(sampleMenuLbl.isDisplayed());
+		Assert.assertEquals(sampleMenu, "Sample menu");
+		
 
 	}
 }
