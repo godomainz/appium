@@ -1,6 +1,8 @@
 package Ecommerce;
 
 import java.time.Duration;
+import java.util.Iterator;
+import java.util.List;
 
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.Test;
@@ -29,6 +31,28 @@ public class EcomTest1 extends BaseTest{
 		
 		WebElement letsShopBtnElement = driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/btnLetsShop"));
 		letsShopBtnElement.click();
+		
+		String productName = "Jordan 6 Rings";
+		scrollAction(productName);
+		
+		List<WebElement> productElements = driver.findElements(AppiumBy.xpath("//android.support.v7.widget.RecyclerView[@resource-id=\"com.androidsample.generalstore:id/rvProductList\"]/android.widget.RelativeLayout/android.widget.LinearLayout"));
+		System.out.println(productElements.size());
+		
+		WebElement productElement = null;
+		for (Iterator<WebElement> iterator = productElements.iterator(); iterator.hasNext();) {
+			WebElement webElement = (WebElement) iterator.next();
+			String productNameTmp = webElement.findElement(AppiumBy.id("com.androidsample.generalstore:id/productName")).getText();
+			if(productNameTmp.equalsIgnoreCase(productName)) {
+				productElement = webElement;
+				break;
+			}
+		}
+		
+		WebElement addTocartBtnElement = productElement.findElement(AppiumBy.id("com.androidsample.generalstore:id/productAddCart"));
+		addTocartBtnElement.click();
+		
+		WebElement cartIconElement = driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/appbar_btn_cart"));
+		cartIconElement.click();
 		
 		Thread.sleep(Duration.ofSeconds(3));
 
