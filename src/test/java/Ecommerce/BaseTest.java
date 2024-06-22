@@ -84,6 +84,11 @@ public class BaseTest {
 	public void startActivity(String fullActivityName) {
 		((JavascriptExecutor) driver).executeScript("mobile: startActivity", ImmutableMap.of("intent", fullActivityName));
 	}
+	
+	public Double getFormattedAmount(String amount) {
+		return Double.parseDouble(amount.substring(1).trim());
+
+	}
 
 
 	@AfterClass

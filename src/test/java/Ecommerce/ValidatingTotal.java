@@ -42,19 +42,19 @@ public class ValidatingTotal extends BaseTest {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.androidsample.generalstore:id/toolbar_title")));
 		
-		Double expectedTotal = 280.97;
-		
 		List<WebElement> pricesElements = driver.findElements(AppiumBy.id("com.androidsample.generalstore:id/productPrice"));
 		System.out.println(pricesElements.size());
 		
 		Double total = 0.0;
 		for(int i=0; i< pricesElements.size();i++) {
-			Double price = Double.parseDouble(pricesElements.get(i).getText().substring(1));
+			Double price =getFormattedAmount(pricesElements.get(i).getText());
 			total = total + price;
 			System.out.println(price);
 		}
 		
-		Assert.assertEquals(total, expectedTotal);
+		Double totalAmount = getFormattedAmount(driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/totalAmountLbl")).getText());
+		Assert.assertEquals(total, totalAmount);
+
 		Thread.sleep(Duration.ofSeconds(3));
 	}
 
