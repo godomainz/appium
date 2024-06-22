@@ -1,10 +1,12 @@
 package Ecommerce;
 
 import java.time.Duration;
-import java.util.Iterator;
 import java.util.List;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import io.appium.java_client.AppiumBy;
@@ -35,24 +37,40 @@ public class EcomTest1 extends BaseTest{
 		String productName = "Jordan 6 Rings";
 		scrollAction(productName);
 		
-		List<WebElement> productElements = driver.findElements(AppiumBy.xpath("//android.support.v7.widget.RecyclerView[@resource-id=\"com.androidsample.generalstore:id/rvProductList\"]/android.widget.RelativeLayout/android.widget.LinearLayout"));
+		List<WebElement> productElements = driver.findElements(AppiumBy.id("com.androidsample.generalstore:id/productName"));
 		System.out.println(productElements.size());
 		
-		WebElement productElement = null;
-		for (Iterator<WebElement> iterator = productElements.iterator(); iterator.hasNext();) {
-			WebElement webElement = (WebElement) iterator.next();
-			String productNameTmp = webElement.findElement(AppiumBy.id("com.androidsample.generalstore:id/productName")).getText();
-			if(productNameTmp.equalsIgnoreCase(productName)) {
-				productElement = webElement;
+		WebElement productAddToCartBtnElement = null;
+		for (int i=0;i<productElements.size();i++) {
+			String productText = productElements.get(i).getText();
+			if(productText.equalsIgnoreCase(productName)) {
+				productAddToCartBtnElement = driver.findElements(AppiumBy.id("com.androidsample.generalstore:id/productAddCart")).get(i);
 				break;
 			}
 		}
 		
-		WebElement addTocartBtnElement = productElement.findElement(AppiumBy.id("com.androidsample.generalstore:id/productAddCart"));
-		addTocartBtnElement.click();
-		
+		productAddToCartBtnElement.click();
+
 		WebElement cartIconElement = driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/appbar_btn_cart"));
 		cartIconElement.click();
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.visibilityOfElementLocated(AppiumBy.id("com.androidsample.generalstore:id/toolbar_title")));
+		
+		List<WebElement> cartProductElements = driver.findElements(AppiumBy.xpath("//android.widget.TextView[@resource-id=\"com.androidsample.generalstore:id/productName\"]"));
+		System.out.println(cartProductElements.size());
+		boolean productFound = false;
+		for (int i=0;i<cartProductElements.size();i++) {
+			WebElement webElement = cartProductElements.get(i);
+			String productNameTmp = webElement.getText();
+			System.out.println(productNameTmp);
+			if(productNameTmp.equalsIgnoreCase(productName)) {
+				productFound = true;
+				break;
+			}
+		}
+		Assert.assertTrue(productFound);
+		
 		
 		Thread.sleep(Duration.ofSeconds(3));
 
