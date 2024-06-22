@@ -54,7 +54,19 @@ public class ValidatingTotal extends BaseTest {
 		
 		Double totalAmount = getFormattedAmount(driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/totalAmountLbl")).getText());
 		Assert.assertEquals(total, totalAmount);
+		
+		WebElement termsElement = driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/termsButton"));
+		longPressAction(termsElement);
+		
+		WebElement closeBtnElement = driver.findElement(AppiumBy.id("android:id/button1"));
+		closeBtnElement.click();
+		
+		WebElement sendEmailElement = driver.findElement(AppiumBy.xpath("//android.widget.CheckBox[@text=\"Send me e-mails on discounts related to selected products in future\"]"));
+		sendEmailElement.click();
 
+		WebElement visitWebElement = driver.findElement(AppiumBy.id("com.androidsample.generalstore:id/btnProceed"));
+		visitWebElement.click();
+		
 		Thread.sleep(Duration.ofSeconds(3));
 	}
 
