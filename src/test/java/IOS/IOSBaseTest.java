@@ -20,7 +20,7 @@ public class IOSBaseTest {
 
 	@BeforeClass
 	public void configureAppium() throws MalformedURLException, URISyntaxException {
-		String appiumJS = "//usr//local//lib//node_modules//appium//build//lib//main.js";
+		String appiumJS = "//usr//local//lib//node_modules//appium//index.js";
 		AppiumServiceBuilder service = new AppiumServiceBuilder();
 		service.withAppiumJS(new File(appiumJS));
 		service.withIPAddress("127.0.0.1");
