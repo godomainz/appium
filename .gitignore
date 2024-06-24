@@ -20,5 +20,6 @@ buildNumber.properties
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 test-output
-
+bin/
+src/test/java/resources/UIKitCatalog.app/
 # End of https://www.toptal.com/developers/gitignore/api/maven
