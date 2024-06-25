@@ -11,6 +11,15 @@ public class IOSBasics extends IOSBaseTest {
 		WebElement alertViewBtnElement = driver.findElement(AppiumBy.accessibilityId("Alert Views"));
 		alertViewBtnElement.click();
 		
+		WebElement textEntryBtnElement = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeStaticText[`name == \"Text Entry\"`]"));
+		textEntryBtnElement.click();
+		
+		WebElement shortTitleTxtElement = driver.findElement(AppiumBy.iOSClassChain("**/XCUIElementTypeCell"));
+		shortTitleTxtElement.sendKeys("Hello World");
+		
+		WebElement okBtnElement = driver.findElement(AppiumBy.accessibilityId("OK"));
+		okBtnElement.click();
+		
 	}
 
 }
